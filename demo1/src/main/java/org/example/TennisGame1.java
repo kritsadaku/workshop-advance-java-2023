@@ -34,15 +34,17 @@ public class TennisGame1 implements TennisGame {
             return scoreText[mScore1] +"-All";
         }
 
-
-
-        if (mScore1 >= 4 || mScore2 >= 4) {
-            int minusResult = mScore1 - mScore2;
-            if (minusResult==1) score = new StringBuilder("Advantage player1");
-            else if (minusResult ==-1) score = new StringBuilder("Advantage player2");
-            else if (minusResult>=2) score = new StringBuilder("Win for player1");
-            else score = new StringBuilder("Win for player2");
+        if (isAdvantage()) {
+            if (mScore1 - mScore2==1) return "Advantage " +player1Name;
+            return "Advantage " + player2Name;
         }
+
+        if (isWin()) {
+            if (mScore1 - mScore2>=2) return "Win for " + player1Name;
+            return "Win for " + player2Name;
+
+        }
+
         else
         {
             for (int i=1; i<3; i++)
@@ -58,6 +60,14 @@ public class TennisGame1 implements TennisGame {
             }
         }
         return score.toString();
+    }
+
+    private boolean isWin() {
+        return (mScore1 >= 4 || mScore2 >= 4) && Math.abs(mScore1 - mScore2) >= 2;
+    }
+
+    private boolean isAdvantage() {
+        return (mScore1 >= 4 || mScore2 >= 4) && Math.abs(mScore1 - mScore2) == 1;
     }
 
     private boolean isNotDeuce() {
