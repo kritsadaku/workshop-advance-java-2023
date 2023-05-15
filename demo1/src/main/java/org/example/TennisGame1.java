@@ -22,15 +22,13 @@ public class TennisGame1 implements TennisGame {
     }
 
     public String getScore() {
-        StringBuilder score = new StringBuilder();
-        int tempScore;
+        String[] scoreText = new String[] {"Love","Fifteen","Thirty","Forty"};
 
         if (isDeuce()) {
             return "Deuce";
         }
 
         if (isNotDeuce()) {
-            String[] scoreText = new String[] {"Love","Fifteen","Thirty"};
             return scoreText[mScore1] +"-All";
         }
 
@@ -45,21 +43,7 @@ public class TennisGame1 implements TennisGame {
 
         }
 
-        else
-        {
-            for (int i=1; i<3; i++)
-            {
-                if (i==1) tempScore = mScore1;
-                else { score.append("-"); tempScore = mScore2;}
-                switch (tempScore) {
-                    case 0 -> score.append("Love");
-                    case 1 -> score.append("Fifteen");
-                    case 2 -> score.append("Thirty");
-                    case 3 -> score.append("Forty");
-                }
-            }
-        }
-        return score.toString();
+        return scoreText[mScore1] + "-" + scoreText[mScore2];
     }
 
     private boolean isWin() {
