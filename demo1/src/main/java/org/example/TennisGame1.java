@@ -32,9 +32,8 @@ public class TennisGame1 implements TennisGame {
                 return rule.announce(mScore1,mScore2);
             }
         }
-        String[] scoreText = new String[] {"Love","Fifteen","Thirty","Forty"};
+        throw new RuntimeException("Invalid rule !!");
 
-        return scoreText[mScore1] + "-" + scoreText[mScore2];
     }
     public void wonPoint(String playerName) {
         if (Objects.equals(playerName, this.player1Name))

@@ -1,7 +1,7 @@
 package org.example;
 
 public class DefaultRule implements TennisRule {
-    String[] scoreText = new String[] {"Love","Fifteen","Thirty","Forty"};
+    ScoreText scoreText = new ScoreText();
     public DefaultRule(){
 
     }
@@ -12,6 +12,6 @@ public class DefaultRule implements TennisRule {
 
     @Override
     public String announce(int mScore1, int mScore2) {
-        return scoreText[mScore1] + "-" + scoreText[mScore2];
+        return scoreText.text[mScore1] + "-" + scoreText.text[mScore2];
     }
 }
