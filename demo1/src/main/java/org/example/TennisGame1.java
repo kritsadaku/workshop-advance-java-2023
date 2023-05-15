@@ -22,43 +22,20 @@ public class TennisGame1 implements TennisGame {
     }
 
     public String getScore() {
+
+        TennisRule[] rules = new TennisRule[] {
+                new WinnerRule(player1Name,player2Name),
+                new AdvantageRule(player1Name,player2Name),
+                new isNotDeuceRule(),
+                new isDeuce()
+        };
+        for (TennisRule rule : rules){
+            if(rule.check(mScore1,mScore2)){
+                return rule.announce(mScore1,mScore2);
+            }
+        }
         String[] scoreText = new String[] {"Love","Fifteen","Thirty","Forty"};
 
-        if (isDeuce()) {
-            return "Deuce";
-        }
-
-        if (isNotDeuce()) {
-            return scoreText[mScore1] +"-All";
-        }
-
-        if (isAdvantage()) {
-            if (mScore1 - mScore2==1) return "Advantage " +player1Name;
-            return "Advantage " + player2Name;
-        }
-
-        if (isWin()) {
-            if (mScore1 - mScore2>=2) return "Win for " + player1Name;
-            return "Win for " + player2Name;
-
-        }
-
         return scoreText[mScore1] + "-" + scoreText[mScore2];
-    }
-
-    private boolean isWin() {
-        return (mScore1 >= 4 || mScore2 >= 4) && Math.abs(mScore1 - mScore2) >= 2;
-    }
-
-    private boolean isAdvantage() {
-        return (mScore1 >= 4 || mScore2 >= 4) && Math.abs(mScore1 - mScore2) == 1;
-    }
-
-    private boolean isNotDeuce() {
-        return mScore1 == mScore2 && mScore1 <= 2;
-    }
-
-    private boolean isDeuce() {
-        return mScore1 == mScore2 && mScore1 > 2;
     }
 }
